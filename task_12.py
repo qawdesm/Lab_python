@@ -35,17 +35,17 @@ tax_amount = total_before_tax * tax_rate
 
 final_total = total_before_tax + tax_amount
 
-print(f"Базовая цена: {base_price:.2f} rub.")
+print(f"Базовая цена: {base_price:.2f} .бун")
 
 if dop_minutes > 0:
-    print(f"Доп. минуты: {cost_dop_minutes:.2f} rub.")
+    print(f"Доп. минуты: {cost_dop_minutes:.2f} бун.")
 
 if dop_sms > 0:
-    print(f"Доп SMS: {cost_dop_sms:.2f} rub.")
+    print(f"Доп SMS: {cost_dop_sms:.2f} бун.")
 
 if dop_internet > 0:
-    print(f"Доп минуты: {cost_dop_internet:.2f} rub.")
+    print(f"Доп минуты: {cost_dop_internet:.2f} бун.")
 
-print(f"Сумма до налога: {total_before_tax:.2f} rub.")
-print(f"Налог(2%): {tax_amount:.2f} rub.")
-print(f"Итоговая сумма: {final_total:.2f} rub.")
+print(f"Сумма до налога: {total_before_tax:.2f} бун.")
+print(f"Налог(2%): {tax_amount:.2f} бун.")
+print(f"Итоговая сумма: {final_total:.2f} бун.")
