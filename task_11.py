@@ -1,6 +1,9 @@
 day = int(input("Введите день рождения (число): "))
 month = int(input("Введите месяц рождения (число от 1 до 12): "))
 
+user_day = day
+user_month = month
+
 if (month == 12 and day >= 23) or (month == 1 and day <= 20):
     sign = "Козерог"
 elif (month == 1 and day >= 21) or (month == 2 and day <= 19):
@@ -28,4 +31,5 @@ elif (month == 11 and day >= 23) or (month == 12 and day <= 21):
 else:
     sign = "Неверная дата"
 
+print(f"Введенная дата: {user_day} день {user_month} месяц в году ")
 print(f"Ваш знак зодиака: {sign}")
