@@ -35,7 +35,11 @@ tax_amount = total_before_tax * tax_rate
 
 final_total = total_before_tax + tax_amount
 
-print(f"Базовая цена: {base_price:.2f} .бун")
+print(f"Базовый тариф включает:")
+print(f" - {base_minutes} минут")
+print(f" - {base_sms} SMS") 
+print(f" - {base_internet} МБ интернета")
+print(f" - Стоимость: {base_price:.2f} бун.")
 
 if dop_minutes > 0:
     print(f"Доп. минуты: {cost_dop_minutes:.2f} бун.")
