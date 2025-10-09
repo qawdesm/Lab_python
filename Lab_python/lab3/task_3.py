@@ -330,7 +330,7 @@ class BankSystem:
             return
         
         client = self.bank.clients[self.current_client]
-        filename = f"bank_statement_{client.client_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        filename = f"bank{client.client_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
         
         try:
             with open(filename, 'w', encoding='utf-8') as file:
