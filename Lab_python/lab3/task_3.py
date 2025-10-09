@@ -104,8 +104,8 @@ class BankAccount:
 class Bank:
     def __init__(self, name):
         self.name = name
-        self.clients = {}  # client_id -> Client
-        self.accounts = {}  # account_number -> BankAccount
+        self.clients = {}  
+        self.accounts = {}
         self.next_account_number = 1
 
     def generate_account_number(self):
@@ -174,30 +174,26 @@ class BankSystem:
         self.setup_sample_data()
 
     def setup_sample_data(self):
-        # Создаем тестовых клиентов
         clients_data = [
-            ("001", "Иван Иванов", "+79161234567", "ivan@mail.ru"),
-            ("002", "Мария Петрова", "+79167654321", "maria@mail.ru"),
-            ("003", "Алексей Сидоров", "+79169998877", "alex@mail.ru")
+            ("001", "Иван Козлов", "+375296547892", "ivan@mail.ru"),
+            ("002", "Мария Григоренко", "+375291963348", "maria@mail.ru"),
+            ("003", "Алексей Сидоров", "+375445652323", "alex@mail.ru")
         ]
         
         for client_id, name, phone, email in clients_data:
             client = Client(client_id, name, phone, email)
             self.bank.add_client(client)
             
-            # Открываем счета для тестовых клиентов
             self.bank.open_account(client_id, "RUB", 1000)
             self.bank.open_account(client_id, "USD", 100)
 
     def show_menu(self):
-        print("\n" + "="*50)
-        print("         БАНКОВСКАЯ СИСТЕМА")
-        print("="*50)
+        print("БАНКОВСКАЯ СИСТЕМА")
         if self.current_client:
             client = self.bank.clients[self.current_client]
             print(f"Клиент: {client.name} (ID: {client.client_id})")
-            print("="*50)
         
+        print("0. Выход из программы")
         print("1. Войти в систему")
         print("2. Открыть счет")
         print("3. Закрыть счет")
@@ -207,8 +203,6 @@ class BankSystem:
         print("7. Показать мои счета")
         print("8. Выписка по счетам (сохранить в файл)")
         print("9. Выйти из системы")
-        print("0. Выход из программы")
-        print("="*50)
 
     def login(self):
         client_id = input("Введите ваш ID клиента: ").strip()
@@ -261,8 +255,7 @@ class BankSystem:
         amount = float(input("Введите сумму для пополнения: "))
         
         try:
-            account = self.bank.validate_client_access(self.current_client, 
-                                                     self.bank.clients[self.current_client].get_account(currency).account_number)
+            account = self.bank.validate_client_access(self.current_client, self.bank.clients[self.current_client].get_account(currency).account_number)
             account.deposit(amount)
             print(f"Счет успешно пополнен на {amount} {currency}")
             print(f"Текущий баланс: {account.balance} {currency}")
@@ -278,8 +271,7 @@ class BankSystem:
         amount = float(input("Введите сумму для снятия: "))
         
         try:
-            account = self.bank.validate_client_access(self.current_client, 
-                                                     self.bank.clients[self.current_client].get_account(currency).account_number)
+            account = self.bank.validate_client_access(self.current_client, self.bank.clients[self.current_client].get_account(currency).account_number)
             account.withdraw(amount)
             print(f"Со счета снято {amount} {currency}")
             print(f"Текущий баланс: {account.balance} {currency}")
@@ -296,8 +288,7 @@ class BankSystem:
         amount = float(input("Введите сумму для перевода: "))
         
         try:
-            from_account = self.bank.validate_client_access(self.current_client, 
-                                                          self.bank.clients[self.current_client].get_account(from_currency).account_number)
+            from_account = self.bank.validate_client_access(self.current_client, self.bank.clients[self.current_client].get_account(from_currency).account_number)
             target_account = self.bank.get_account(target_account_number)
             
             if not target_account:
@@ -318,9 +309,7 @@ class BankSystem:
         client = self.bank.clients[self.current_client]
         accounts = client.accounts
         
-        print("\n" + "="*50)
         print("ВАШИ СЧЕТА")
-        print("="*50)
         
         if not accounts:
             print("У вас нет открытых счетов")
@@ -331,10 +320,9 @@ class BankSystem:
             print(f"  Номер счета: {account.account_number}")
             print(f"  Баланс: {account.balance} {currency}")
             print(f"  Дата открытия: {account.created_date.strftime('%d.%m.%Y %H:%M')}")
-            print("-" * 30)
         
         total_balance = client.get_total_balance()
-        print(f"ОБЩИЙ БАЛАНС: {total_balance} RUB (в рублевом эквиваленте)")
+        print(f"ОБЩИЙ БАЛАНС: {total_balance} RUB ")
 
     def generate_statement(self):
         if not self.current_client:
@@ -346,13 +334,10 @@ class BankSystem:
         
         try:
             with open(filename, 'w', encoding='utf-8') as file:
-                file.write("="*60 + "\n")
                 file.write("              ВЫПИСКА ПО СЧЕТАМ\n")
-                file.write("="*60 + "\n")
                 file.write(f"Клиент: {client.name}\n")
                 file.write(f"ID клиента: {client.client_id}\n")
                 file.write(f"Дата формирования: {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}\n")
-                file.write("="*60 + "\n\n")
                 
                 if not client.accounts:
                     file.write("Нет открытых счетов\n")
@@ -362,14 +347,11 @@ class BankSystem:
                         file.write(f"  Номер счета: {account.account_number}\n")
                         file.write(f"  Баланс: {account.balance:.2f} {currency}\n")
                         file.write(f"  Дата открытия: {account.created_date.strftime('%d.%m.%Y')}\n")
-                        file.write("-" * 40 + "\n")
                     
                     total_balance = client.get_total_balance()
                     file.write(f"\nОБЩИЙ БАЛАНС: {total_balance:.2f} RUB\n")
                 
-                file.write("="*60 + "\n")
                 file.write("Конец выписки\n")
-                file.write("="*60 + "\n")
             
             print(f"Выписка сохранена в файл: {filename}")
             
