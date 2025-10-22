@@ -50,6 +50,9 @@ if dop_sms > 0:
 if dop_internet > 0:
     print(f"Доп минуты: {cost_dop_internet:.2f} бун.")
 
+all_dop = cost_dop_minutes + cost_dop_sms + cost_dop_internet 
+
+print(f"общая сумма до услуг: {all_dop} бун")
 print(f"Сумма до налога: {total_before_tax:.2f} бун.")
 print(f"Налог(2%): {tax_amount:.2f} бун.")
 print(f"Итоговая сумма: {final_total:.2f} бун.")
