@@ -1,0 +1,28 @@
+﻿# All Python virtual environments
+venv*/
+venv_*/
+*/venv*/
+*venv*/
+lab4.*/venv_*/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.python-version
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System
+.DS_Store
+Thumbs.db
