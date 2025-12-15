@@ -130,7 +130,7 @@ plt.xticks(years)
 
 plt.subplot(3, 2, 3)
 top_specialties = df['Специальность'].value_counts().head(5).index
-passing_scores = df.groupby(['Год_поступления', 'Специальность'])['Общий_балл'].min().reset_index()
+passing_scores = df.groupby(['Год_поступления', 'Специальность'])['Общий_балл'].quantile(0.75).reset_index()
 
 for specialty in top_specialties:
     specialty_data = passing_scores[passing_scores['Специальность'] == specialty]
