@@ -12,13 +12,13 @@ class CountryDataParser:
     def __init__(self, cache_dir="cache"):
         self.session = requests.Session()
         #добавила так как перестало работать
-        headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9',
-        'Referer': 'https://www.google.com/',
-        }
-        self.session.headers.update(headers)
+        #headers = {
+        #'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        #'Accept-Language': 'en-US,en;q=0.9',
+        #'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9',
+        #Referer': 'https://www.google.com/',
+       # }
+        #self.session.headers.update(headers)
         
         self.cache_dir = cache_dir
         if not os.path.exists(cache_dir):
@@ -136,7 +136,6 @@ class CountryDataParser:
         return ""
 
     def parse_country_data(self, country_name):
-        """Парсит данные о стране с Википедии"""
         country_name = country_name.strip()
         country_name = re.sub(r'[^\x00-\x7F]+', '', country_name)
         country_name = country_name.replace('\ufeff', '').replace('\u200b', '')
